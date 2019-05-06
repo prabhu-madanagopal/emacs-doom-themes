@@ -1,4 +1,5 @@
-;;; doom-solarized-light-theme.el --- inspired by Atom One Dark
+;;; doom-solarized-dark-theme.el --- inspired by Atom One Dark
+(add-to-list 'custom-theme-load-path "~/solarized/emacs-colors-solarized")
 (require 'doom-themes)
 
 ;;
@@ -34,7 +35,7 @@ determine the exact padding."
 
   ;; name        default   256       16
   ((bg         '("#FDF6E3" nil       nil            ))
-   (bg-alt     '("#FFFBEA" nil       nil            ))
+   (bg-alt     '("#eee8d5" nil       nil            ))
    (base0      '("#FFFBF0" "black"   "black"        ))
    (base1      '("#FCF8ED" "#1e1e1e" "brightblack"  ))
    (base2      '("#FCF7E8" "#2e2e2e" "brightblack"  ))
@@ -44,8 +45,8 @@ determine the exact padding."
    (base6      '("#96A7A9" "#6b6b6b" "brightblack"  ))
    (base7      '("#788484" "#979797" "brightblack"  ))
    (base8      '("#626C6C" "#dfdfdf" "white"        ))
-   (fg         '("#556b72" "#2d2d2d" "white"        ))
-   (fg-alt     '("#7B8787" "#bfbfbf" "brightwhite"  ))
+   (fg         '("#657b83" "#2d2d2d" "white"        ))
+   (fg-alt     '("#586e75" "#bfbfbf" "brightwhite"  ))
 
    (grey       base4)
    (red        '("#dc322f" "#ff6655" "red"          ))
@@ -61,9 +62,9 @@ determine the exact padding."
    (dark-cyan  '("#D7DDD7" "#5699AF" "cyan"         ))
 
    ;; face categories -- required for all themes
-   (highlight      blue)
+   (highlight      fg-alt)
    (vertical-bar   base4)
-   (selection      dark-blue)
+   (selection      bg-alt)
    (builtin        magenta)
    (comments       (if doom-solarized-light-brighter-comments
                        (doom-lighten teal 0.25)
@@ -78,6 +79,7 @@ determine the exact padding."
    (strings        cyan)
    (variables      blue)
    (numbers        violet)
+   (cursor         `(,(doom-darken (car fg-alt) 0.1) ,@(doom-darken (cdr base3) 0.1)))
    (region         `(,(doom-darken (car bg-alt) 0.1) ,@(doom-darken (cdr base0) 0.1)))
    (error          red)
    (warning        yellow)
@@ -111,7 +113,7 @@ determine the exact padding."
   ;; --- extra faces ------------------------
   ((elscreen-tab-other-screen-face :background "#353a42" :foreground "#1e2022")
 
-   (hl-line :background nil)
+   ;; (hl-line :background nil)
 
    ((line-number &override) :foreground base6)
    ((line-number-current-line &override) :foreground fg :background region :weight 'bold)
@@ -182,4 +184,13 @@ determine the exact padding."
   ;; ()
   )
 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(lazy-highlight ((t (:background "#eee8d5" :foreground "#586e75" :weight bold))))
+ '(lsp-face-highlight-read ((t (:background "#eee8d5" :foreground "#586e75" :weight bold))))
+ '(lsp-face-highlight-textual ((t (:background "#eee8d5" :foreground "#586e75" :weight bold))))
+ '(lsp-face-highlight-write ((t (:background "#eee8d5" :foreground "#586e75" :weight bold)))))
 ;;; doom-solarized-light-theme.el ends here

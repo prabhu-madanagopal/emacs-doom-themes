@@ -1,4 +1,5 @@
 ;;; doom-solarized-dark-theme.el --- inspired by Atom One Dark
+(add-to-list 'custom-theme-load-path "~/solarized/emacs-colors-solarized")
 (require 'doom-themes)
 
 ;;
@@ -33,19 +34,19 @@ determine the exact padding."
   "A dark theme inspired by Solarized dark"
 
   ;; name        default   256       16
-  ((bg         '("#FDF6E3" nil       nil            ))
-   (bg-alt     '("#FFFBEA" nil       nil            ))
-   (base0      '("#FFFBF0" "black"   "black"        ))
-   (base1      '("#FCF8ED" "#1e1e1e" "brightblack"  ))
-   (base2      '("#FCF7E8" "#2e2e2e" "brightblack"  ))
-   (base3      '("#F2E6CE" "#262626" "brightblack"  ))
-   (base4      '("#E1DBCD" "#3f3f3f" "brightblack"  ))
-   (base5      '("#D6D6D6" "#525252" "brightblack"  ))
-   (base6      '("#96A7A9" "#6b6b6b" "brightblack"  ))
-   (base7      '("#788484" "#979797" "brightblack"  ))
-   (base8      '("#626C6C" "#dfdfdf" "white"        ))
-   (fg         '("#556b72" "#2d2d2d" "white"        ))
-   (fg-alt     '("#7B8787" "#bfbfbf" "brightwhite"  ))
+  ((bg         '("#002b36" nil       nil            ))
+   (bg-alt     '("#073642" nil       nil            ))
+   (base0      '("#586e75" "black"   "brightgreen"  ))
+   (base1      '("#93a1a1" "#1e1e1e" "brightyellow" ))
+   (base2      '("#839496" "#2e2e2e" "brightblue"   ))
+   (base3      '("#93a1a1" "#073642" "brightcyan"   ))
+   (base4      '("#073642" "#3f3f3f" "white"  ))
+   (base5      '("#fdf6e3" "#525252" "brightblack"  ))
+   (base6      '("#586e75" "#6b6b6b" "brightblack"  ))
+   (base7      '("#cb4b16" "#979797" "brightblack"  ))
+   (base8      '("#073642" "#dfdfdf" "white"        ))
+   (fg         '("#839496" "#2d2d2d" "brightblue"   ))
+   (fg-alt     '("#93a1a1" "#bfbfbf" "brightcyan"   ))
 
    (grey       base4)
    (red        '("#dc322f" "#ff6655" "red"          ))
@@ -61,12 +62,12 @@ determine the exact padding."
    (dark-cyan  '("#D7DDD7" "#5699AF" "cyan"         ))
 
    ;; face categories -- required for all themes
-   (highlight      blue)
+   (highlight      fg-alt)
    (vertical-bar   base4)
-   (selection      dark-blue)
+   (selection      bg-alt)
    (builtin        magenta)
    (comments       (if doom-solarized-dark-brighter-comments
-                       (doom-lighten teal 0.25)
+                       (doom-darken teal 0.25)
                      base6))
    (doc-comments   teal)
    (constants      violet)
@@ -78,7 +79,8 @@ determine the exact padding."
    (strings        cyan)
    (variables      blue)
    (numbers        violet)
-   (region         `(,(doom-darken (car bg-alt) 0.1) ,@(doom-darken (cdr base0) 0.1)))
+   ;; (cursor         `(,(doom-lighten (car fg) 0.1) ,@(doom-lighten (cdr base6) 0.1)))
+   (region         `(,(doom-lighten (car bg-alt) 0.1) ,@(doom-lighten (cdr base0) 0.1)))
    (error          red)
    (warning        yellow)
    (success        green)
@@ -94,24 +96,24 @@ determine the exact padding."
       (if (integerp doom-solarized-dark-padded-modeline) doom-solarized-dark-padded-modeline 4)))
 
    (modeline-fg     nil)
-   (modeline-fg-alt base6)
+   (modeline-fg-alt base3)
 
    (modeline-bg
     (if -modeline-bright
-        (doom-lighten bg 0.7)
-      (doom-lighten base3 0.2)))
+        (doom-darken bg 0.7)
+      (doom-darken base0 0.2)))
    (modeline-bg-l
     (if -modeline-bright
-        (doom-lighten bg 0.7)
+        (doom-darken bg 0.7)
       (doom-darken bg 0.05)))
-   (modeline-bg-inactive   (doom-darken bg 0.02))
-   (modeline-bg-inactive-l (doom-darken bg 0.025)))
+   (modeline-bg-inactive   (doom-lighten bg 0.02))
+   (modeline-bg-inactive-l (doom-lighten bg 0.025)))
 
 
   ;; --- extra faces ------------------------
   ((elscreen-tab-other-screen-face :background "#353a42" :foreground "#1e2022")
 
-   (hl-line :background nil)
+   ;; (hl-line :background bg-alt)
 
    ((line-number &override) :foreground base6)
    ((line-number-current-line &override) :foreground fg :background region :weight 'bold)
@@ -159,10 +161,10 @@ determine the exact padding."
    ;; markdown-mode
    (markdown-markup-face :foreground base5)
    (markdown-header-face :inherit 'bold :foreground red)
-   (markdown-code-face :background (doom-lighten base3 0.05))
+   (markdown-code-face :background (doom-darken base3 0.05))
 
    ;; ivy-mode
-   (ivy-current-match :background (doom-lighten yellow 0.65) :distant-foreground fg)
+   (ivy-current-match :background (doom-darken yellow 0.65) :distant-foreground fg)
    (ivy-minibuffer-match-face-1
     :foreground comments
     :weight 'light)
@@ -175,11 +177,25 @@ determine the exact padding."
    (ivy-posframe :background modeline-bg-l)
    ;; org-mode
    (org-hide :foreground hidden)
-   (solaire-org-hide-face :foreground hidden))
+   (solaire-org-hide-face :foreground hidden)
 
+
+    )
 
   ;; --- extra variables ---------------------
   ;; ()
   )
+
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(evil-ex-search ((t (:background "#b58900" :foreground "#002b36" :weight bold))))
+ '(lazy-highlight ((t (:background "#93a1a1" :foreground "#002b36" :weight bold))))
+ '(lsp-face-highlight-read ((t (:background "#93a1a1" :foreground "#002b36" :weight bold))))
+ '(lsp-face-highlight-textual ((t (:background "#93a1a1" :foreground "#002b36" :weight bold))))
+ '(lsp-face-highlight-write ((t (:background "#93a1a1" :foreground "#002b36" :weight bold)))))
 
 ;;; doom-solarized-dark-theme.el ends here
